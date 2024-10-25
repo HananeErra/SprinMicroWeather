@@ -1,0 +1,246 @@
+openapi: 3.0.0
+x-stoplight:
+  id: u4gmx6hra875y
+info:
+  title: weather-api
+  version: '1.0'
+servers:
+  - url: 'http://localhost:3000'
+paths:
+  /city:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: '#/components/schemas/City'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: '#/components/schemas/WeatherError'
+      operationId: get-city
+      x-stoplight:
+        id: ii5s5whksbkkb
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: city-id
+        - schema:
+            type: string
+          in: query
+          name: name
+    put:
+      summary: Your PUT endpoint
+      tags: []
+      responses:
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: '#/components/schemas/WeatherError'
+        2XX:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: '#/components/schemas/City'
+      operationId: put-city
+      x-stoplight:
+        id: vj8ct5dqj8guv
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: city-id
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              $ref: '#/components/schemas/City'
+    post:
+      summary: Your POST endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: '#/components/schemas/City'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: '#/components/schemas/WeatherError'
+      operationId: post-city
+      x-stoplight:
+        id: 5s31dolbjkir3
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              $ref: '#/components/schemas/City'
+    delete:
+      summary: Your DELETE endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: '#/components/schemas/WeatherError'
+      operationId: delete-city
+      x-stoplight:
+        id: kvzyh1pvz1v8m
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: city-id
+      requestBody:
+        content: {}
+  /weather:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: '#/components/schemas/Weather'
+      operationId: get-weather
+      x-stoplight:
+        id: b47ugh48mat6h
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: city-id
+  /weathers:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Weather'
+      operationId: get-weathers
+      x-stoplight:
+        id: ieojr98qkgvt6
+components:
+  schemas:
+    City:
+      title: City
+      x-stoplight:
+        id: 0ch76r691dp2p
+      type: object
+      properties:
+        id:
+          type: string
+          x-stoplight:
+            id: scz57o0yn4xzt
+        name:
+          type: string
+          x-stoplight:
+            id: uc2msh5qe401b
+        zipCode:
+          type: integer
+          x-stoplight:
+            id: vw74uc5w02847
+        region:
+          type: string
+          x-stoplight:
+            id: cy556vhkucqdu
+        country:
+          type: string
+          x-stoplight:
+            id: 7weg9yai579i5
+        coordinates:
+          type: object
+          x-stoplight:
+            id: v6ot5e4qvrah6
+          minProperties: 2
+          properties:
+            longitude:
+              type: integer
+              x-stoplight:
+                id: 23exqpu2lr60y
+            latitude:
+              type: integer
+              x-stoplight:
+                id: qats0g1naxalc
+    Weather:
+      title: Weather
+      x-stoplight:
+        id: fq64zsklrx1j6
+      type: object
+      properties:
+        id:
+          type: string
+          x-stoplight:
+            id: 3hrnn99vc6frz
+        temperature:
+          type: integer
+          x-stoplight:
+            id: jb3f571i48wc1
+        status:
+          $ref: '#/components/schemas/WeatherStatus'
+        date:
+          type: string
+          x-stoplight:
+            id: zef4nxsfbipun
+    WeatherStatus:
+      title: WeatherStatus
+      x-stoplight:
+        id: sd86w7g915my7
+      enum:
+        - ENSOLEILLE
+        - NUAGE
+        - ORAGE
+        - NEIGE
+        - PLUIE
+        - VENT
+    WeatherError:
+      title: WeatherError
+      x-stoplight:
+        id: 29zn35gc5474j
+      type: object
+      properties:
+        code:
+          type: string
+          x-stoplight:
+            id: q39hurg06r868
+        message:
+          type: string
+          x-stoplight:
+            id: csak3vhifvux0
